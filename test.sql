@@ -1,0 +1,1 @@
+INSERT INTO price_hist (symbol,open_price,close_price,adj_close,low_price,high_price,volume,trading_dte) VALUES ('AFSI',12,12.004132270813,9.62972545623779,11.9586772918701,12.0826444625854,508200,'2012-08-09');
