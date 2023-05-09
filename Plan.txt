@@ -1,0 +1,52 @@
+Hello, Thank you for the feedback, really appreciate it. 
+Yes, I will see if I can find a data set that classifies each stock by industry, and sub-industry segment. 
+I'll add a foreign key of the stock to the industry table. Also, I will download similar data for market indexes such as the S&P500, and the Dow Jones Industrial Average, etc. 
+Furthermore, I'll also see if I can find similar data on global markets, currencies, and crypto currencies. 
+
+
+I'll put these into separate tables. 
+
+To distinguish each type of data - stock, vs currency vs crypto I will create an instrument type table, add that as a column to the main tables as a foreign key. 
+
+
+Since a large part of the analysis will be based on dates, I'll create a date dimension table that will simplify much of the analytical work. Date Id, day number of week, day name, day of the year, holiday flag, month, fiscal month, quarter, week of the year, is_weekend flag, is week day flag, time zone, etc. 
+
+I'll also add a table that identifies which exchange the stock, currency or option is traded on, with a full name, and abbreviation, and make the primary key for that a foreign key data attribute on the main tables.
+
+ I will likely only be able to readily get data for some of the exchanges and instrument types. 
+I think I can get some additional indicators such as accounts receivable and accounts payable, etc., for some of the stocks. 
+These will give a possible opportunity identifying underlying drivers of the cycle, which with that understanding can help to give a higher confidence of trends repeating in the future. 
+
+I'll follow a similar pattern as outlined above of creating one or more tables of these indicators and making a foreign key reference to each stock. 
+
+Once I have that foundation, I'll create an overall view that pulls all the data on the various financial instruments from the different base tables, adding in the descriptions of industry, type of instrument, which exchange it's traded on. 
+
+Another view will be of the symbol, name, and all time highs and lows. 
+I'll create similar views for yearly, monthly, bimonthly, quarterly, bi-weekly and weekly highs and lows. 
+
+These will be the foundation for looking for cycles that closely correspond to these standard time frames. 
+Another useful set of tools I'll build to get some additional insights will be pivoted / horizontal views so that you can read highs / lows across from left to right, with different time frames for each instrument. 
+
+One view would be symbol, name, date1, high, low, date2, high, low, date3, high, low. Etc. 
+
+I'll follow a similar pattern for horizontal views for each time grouping, such as week, 2 week, 3 week, month, 2 month, and quarter. 
+
+Since most of these types of cycles will probably not cleanly line up with standard time patterns, 
+I will create a number of additional possibilities in my date dimension such as every 2 days, 3 days, etc. up to 180 days from a large number of starting points such as from each day in the year. 
+
+This will make it possible to efficiently look across a wide number of possible patterns. 
+This would be a lot to create manually, but with loops in a stored procedure should be fairly easy. 
+
+Then I will create one or more analytical routines that will look at this data and to find counts of similar patterns for each stock, and put them into a base patterns table. 
+
+This base patterns table will then be used to look for similar patterns that are slightly offset by x days. 
+
+I will attempt to use fluctuations in additional indicators to further validate by correlating them to other patterns found. 
+
+I'll then attempt to create a confidence score of each opportunity pattern based on the number of times the cycle repeats inside of the range. 
+
+Each score will have it's fuller description that's be referenced in a separate table as a foreign key. 
+
+There will hopefully be several types of patterns that emerge that the opportunities can be classified into - they patterns and descriptions of there of will cross referenced in a tables 
+
+All of the identified opportunities will be put into an opportunities table. This table will have the symbol, opportunity pattern type, confidence score, range, and cycle description. With an eye toward making this the foundation of an API, I'll create some stored procedure that will return top picks by type of instrument, exchange, industry and sub industry. Thanks in advance for any additional suggestions, Robert
